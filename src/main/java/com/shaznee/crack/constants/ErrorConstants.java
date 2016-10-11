@@ -9,9 +9,9 @@ public class ErrorConstants {
             "\t D -> Dictionary Mode \n" +
             "\t B -> Brute Force Mode\n\n" +
             "Dictionary Mode Usage: \n" +
-            "\t Crack <{File Name}.pdf> D <{Dictionary File}.txt>\n\n" +
+            "\t Crack <target> D <{Dictionary File}.txt>\n\n" +
             "Brute Force Mode Usage : \n " +
-            "\t Crack <{File Name}.pdf> B <password length> <Character Type> \n\n" +
+            "\t Crack <target> B <password length> <Character Type> \n\n" +
             "Supported Character Types \n" +
             "\t A  -> Aphabets\n" +
             "\t N  -> Numeric\n" +

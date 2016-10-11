@@ -8,4 +8,8 @@ public class CrackerException extends Exception {
     public CrackerException(String message) {
         super(message);
     }
+
+    public CrackerException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

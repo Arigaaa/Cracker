@@ -9,18 +9,17 @@ public class CrackResult {
     private long timeTaken;
     private boolean isSuccessful = false;
 
-    public CrackResult(boolean isSuccessful, String password, long timeTaken) {
-        this(isSuccessful);
-        this.password = password;
-        this.timeTaken = timeTaken;
-    }
-
-    public CrackResult(boolean isSuccessful) {
+    public CrackResult(boolean isSuccessful, String password) {
         this.isSuccessful = isSuccessful;
+        this.password = password;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setTimeTaken(long timeTaken) {
+        this.timeTaken = timeTaken;
     }
 
     public long getTimeTaken() {
