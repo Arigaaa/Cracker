@@ -1,4 +1,4 @@
-package com.shaznee.crack.modes;
+package com.shaznee.crack.cracker.modes;
 
 import com.shaznee.crack.cracker.CrackerImpl;
 import com.shaznee.crack.exceptions.CrackerException;

@@ -1,4 +1,4 @@
-package com.shaznee.crack.Types;
+package com.shaznee.crack.cracker.types;
 
 import com.shaznee.crack.cracker.CrackerType;
 import com.shaznee.crack.exceptions.CrackerException;

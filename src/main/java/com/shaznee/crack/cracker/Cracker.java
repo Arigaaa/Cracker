@@ -3,8 +3,8 @@ package com.shaznee.crack.cracker;
 import com.shaznee.crack.constants.ErrorConstants;
 import com.shaznee.crack.exceptions.CrackerException;
 import com.shaznee.crack.model.CrackResult;
-import com.shaznee.crack.modes.BruteForceMode;
-import com.shaznee.crack.modes.DictionaryMode;
+import com.shaznee.crack.cracker.modes.BruteForceMode;
+import com.shaznee.crack.cracker.modes.DictionaryMode;
 
 /**
  * Created by SHAZNEE on 07-Oct-16.

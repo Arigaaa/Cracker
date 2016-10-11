@@ -1,4 +1,4 @@
-package com.shaznee.crack.modes;
+package com.shaznee.crack.cracker.modes;
 
 import com.shaznee.crack.cracker.CharType;
 import com.shaznee.crack.cracker.CrackerImpl;
@@ -6,7 +6,6 @@ import com.shaznee.crack.exceptions.CrackerException;
 import com.shaznee.crack.exceptions.IncorrectPasswordException;
 import com.shaznee.crack.model.CrackResult;
 
-import java.io.File;
 import java.util.Arrays;
 
 /**
