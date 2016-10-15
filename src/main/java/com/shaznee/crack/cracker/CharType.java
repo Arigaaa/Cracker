@@ -4,5 +4,6 @@ package com.shaznee.crack.cracker;
  * Created by SHAZNEE on 07-Oct-16.
  */
 public enum CharType {
-    APHA, NUMBERIC, ALPHA_NUMERIC
+    ALPHA_UPPER, ALPHA_CASE_INSENSITIVE, ALPHA_CASE_SENSITIVE ,
+    NUMERIC, ALPHA_NUM_CASE_INSENSITIVE, ALPHA_NUM_CASE_SENSITIVE
 }

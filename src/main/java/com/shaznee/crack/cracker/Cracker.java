@@ -11,12 +11,15 @@ import com.shaznee.crack.cracker.modes.DictionaryMode;
  */
 public interface Cracker {
 
-    String MODE_BRUTE_FORCE = "B";
-    String MODE_DICTIONARY = "D";
+    String MODE_BRUTE_FORCE = "-B";
+    String MODE_DICTIONARY = "-D";
 
-    String CHAR_TYPE_ALPHA = "A";
-    String CHAR_TYPE_NUMERIC = "N";
-    String CHAR_TYPE_ALPHA_NUMERIC = "AN";
+    String CHAR_TYPE_ALPHA_CASE_INSENSITIVE = "-A";
+    String CHAR_TYPE_ALPHA_UPPER = "-AU";
+    String CHAR_TYPE_ALPHA_ALPHA_CASE_SENSITIVE = "-AC";
+    String CHAR_TYPE_NUMERIC = "-N";
+    String CHAR_TYPE_ALPHA_NUM_CASE_INSENSITIVE = "-AN";
+    String CHAR_TYPE_ALPHA_NUM_CASE_SENSITIVE = "-ANC";
 
     void setCrackerType(CrackerType crackerType);
 
@@ -38,14 +41,23 @@ public interface Cracker {
                 CharType charType;
 
                 switch (charTypeArg) {
-                    case CHAR_TYPE_ALPHA:
-                        charType = CharType.APHA;
+                    case CHAR_TYPE_ALPHA_UPPER:
+                        charType = CharType.ALPHA_UPPER;
+                        break;
+                    case CHAR_TYPE_ALPHA_CASE_INSENSITIVE:
+                        charType = CharType.ALPHA_CASE_INSENSITIVE;
+                        break;
+                    case CHAR_TYPE_ALPHA_ALPHA_CASE_SENSITIVE:
+                        charType = CharType.ALPHA_CASE_SENSITIVE;
                         break;
                     case CHAR_TYPE_NUMERIC:
-                        charType = CharType.NUMBERIC;
+                        charType = CharType.NUMERIC;
                         break;
-                    case CHAR_TYPE_ALPHA_NUMERIC:
-                        charType = CharType.ALPHA_NUMERIC;
+                    case CHAR_TYPE_ALPHA_NUM_CASE_INSENSITIVE:
+                        charType = CharType.ALPHA_NUM_CASE_INSENSITIVE;
+                        break;
+                    case CHAR_TYPE_ALPHA_NUM_CASE_SENSITIVE:
+                        charType = CharType.ALPHA_NUM_CASE_SENSITIVE;
                         break;
                     default:
                         throw new CrackerException(ErrorConstants.CREATE_CRACKER_USAGE);

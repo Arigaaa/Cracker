@@ -14,19 +14,20 @@ import java.io.IOException;
  */
 public class PDFCracker implements CrackerType {
 
-    private String target;
+    private File file;
 
     public PDFCracker(String target) {
-        this.target = target;
+        file = new File(target);
+        System.out.println("Cracking : " + file.getAbsolutePath());
     }
 
     @Override
     public CrackResult attempt(String password) throws IncorrectPasswordException, CrackerException {
         PDDocument document = null;
         try {
-            System.out.println("Cracking : " + target);
+
             System.out.printf("\rAttempting with: %3s", password);
-            document = PDDocument.load(new File(target), password);
+            document = PDDocument.load(file, password);
 
             int numberOfPages = document.getNumberOfPages();
             System.out.println("Pages :" + numberOfPages);

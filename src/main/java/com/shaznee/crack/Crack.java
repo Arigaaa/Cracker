@@ -22,9 +22,12 @@ public class Crack {
      * arg 2 : passoword length if bruteForce mode
      *
      * arg 3 : password charactor type
-     *                A  - Alpha
-     *                N  - Numeric
-     *                AN - Alphanumeric
+     *                -A   - Alpha Case Insensitive
+     *                -N   - Numeric
+     *                -AU  - Alpha Upper Case
+     *                -AC  - Alpha Case Sensitive
+     *                -AN  - Alphanumeric Case Insensitive
+     *                -ANC - Alphanumeric Case Sensitive
      */
 
     public static void main(String... args) {

@@ -13,15 +13,21 @@ import java.util.Arrays;
  */
 public class BruteForceMode extends CrackerImpl {
 
-    private static final String ALPHA_NUMERIC = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
-    private static final String CHARS = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
-    private static final String NUMBERS = "0123456789";
+    public static final String ALPHA_CASE_INSENSITIVE = "abcdefghijklmnopqrstuvwxyz";
+    public static final String ALPHA_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String ALPHA_CASE_SENSITIVE = ALPHA_CASE_INSENSITIVE + ALPHA_UPPER;
+    public static final String NUMERIC = "0123456789";
+    public static final String ALPHA_NUM_CASE_INSENSITIVE = ALPHA_CASE_INSENSITIVE + NUMERIC;
+    public static final String ALPHA_NUM_CASE_SENSITIVE = ALPHA_CASE_INSENSITIVE + ALPHA_UPPER + NUMERIC;
 
-    private int min;
-    private int max;
+    private char beginning_char;
+    private char ending_char;
     private int passwordLength;
+    private long maxCombinations;
 
-    private int[] current;
+    private String charLimit;
+
+    private char[] current;
 
     public BruteForceMode(int passwordLength, CharType charType) {
         this.passwordLength = passwordLength;
@@ -30,70 +36,77 @@ public class BruteForceMode extends CrackerImpl {
 
     private void init(CharType charType) {
         switch (charType) {
-            case NUMBERIC:
-                initCracker(NUMBERS.toCharArray());
+            case ALPHA_UPPER:
+                initCracker(ALPHA_UPPER);
                 break;
-            case APHA:
-                initCracker(CHARS.toCharArray());
+            case ALPHA_CASE_INSENSITIVE:
+                initCracker(ALPHA_CASE_INSENSITIVE);
                 break;
-            case ALPHA_NUMERIC:
-                initCracker(ALPHA_NUMERIC.toCharArray());
+            case ALPHA_CASE_SENSITIVE:
+                initCracker(ALPHA_CASE_SENSITIVE);
+                break;
+            case NUMERIC:
+                initCracker(NUMERIC);
+                break;
+            case ALPHA_NUM_CASE_INSENSITIVE:
+                initCracker(ALPHA_NUM_CASE_INSENSITIVE);
+                break;
+            case ALPHA_NUM_CASE_SENSITIVE:
+                initCracker(ALPHA_NUM_CASE_SENSITIVE);
                 break;
         }
     }
 
-    private void initCracker(char[] charSequence) {
+    private void initCracker(String charSequence) {
 
-        this.min = charSequence[0];
-        this.max = charSequence[charSequence.length-1];
+        charLimit = charSequence;
 
-        current = new int[passwordLength + 1];
-        Arrays.fill(current, 1, current.length, min);
+        current = new char[passwordLength];
+
+        this.beginning_char = charSequence.charAt(0);
+        this.ending_char = charSequence.charAt(charSequence.length() - 1);
+
+        maxCombinations = (long) Math.pow(charSequence.length(), passwordLength);
+
+        for (int i = 0; i < passwordLength; i++) {
+            current[i] = beginning_char;
+        }
 
     }
 
     @Override
     protected CrackResult run() throws CrackerException {
-        while (current[0] == 0) {
+        for (long i = 0; i < maxCombinations; i++) {
             try {
-                CrackResult crackResult = crackerType.attempt(generate());
+                CrackResult crackResult = crackerType.attempt(getCurrent());
                 if (crackResult.isSuccessful()) {
                     return crackResult;
                 }
             } catch (IncorrectPasswordException e) {
                 continue;
             } finally {
-                increase();
+                generate();
             }
         }
         return new CrackResult(false, "Not Found");
     }
 
-    private String generate() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 1; i < current.length; i++) {
-            stringBuilder.append((char) current[i]);
-        }
-        return stringBuilder.toString();
+    private String getCurrent() {
+        return new String(current);
     }
 
-    private void increase() {
-        for (int i = current.length - 1; i >= 0; i--) {
-            if (current[i] < max) {
-                current[i]++;
-                return;
+    private void generate() {
+        for (int i = 0; i < passwordLength; i++) {
+            if (current[i] == ending_char) {
+                continue;
             }
-            current[i] = min;
+            current[i] = charLimit.charAt(charLimit.indexOf(current[i]) + 1);
+            if (i > 0)
+                for (int z = 0; z < i; z++){
+                    current[z] = beginning_char;
+                }
+            break;
         }
     }
 
-    //        try {
-//            for (int i = 0; i <= 100; i++) {
-//                System.out.printf("\rPercent completed: %3d%%", i);
-//                Thread.sleep(500);
-//            }
-//            System.out.printf(CLEARLINE_FMT + "Done!\n", "");
-//        } catch (InterruptedException e) {
-//            System.out.printf(CLEARLINE_FMT + "Interrupted!\n", "");
-//        }
 }
