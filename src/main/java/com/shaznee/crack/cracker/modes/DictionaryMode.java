@@ -18,7 +18,11 @@ public class DictionaryMode extends CrackerImpl {
     private List<String> wordList;
 
     public DictionaryMode(String dictionary) throws CrackerException {
-        init(new File(dictionary));
+        File dictionaryFile = new File(dictionary);
+        if (!dictionaryFile.exists()) {
+            throw new CrackerException("Dictionary file does not exixt");
+        }
+        init(dictionaryFile);
     }
 
     private void init(File dictionary) throws CrackerException {

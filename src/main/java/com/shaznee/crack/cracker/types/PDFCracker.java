@@ -32,9 +32,9 @@ public class PDFCracker implements CrackerType {
             document = PDDocument.load(file, password);
 
             int numberOfPages = document.getNumberOfPages();
-            System.out.println("\n Pages :" + numberOfPages);
 
             if (numberOfPages > 0) {
+                System.out.println("\n Pages :" + numberOfPages);
                 System.out.println("Success");
                 return new CrackResult(true, password);
             } else {

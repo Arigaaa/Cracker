@@ -15,8 +15,8 @@ public class Crack {
      * arg 0 : Target
      *
      * arg 1 : mode = D/B
-     *                D - Dictionary mode
-     *                B - BruteForce mode
+     *                -D - Dictionary mode
+     *                -B - BruteForce mode
      *
      * arg 2 : dictionary text if dictionary mode
      * arg 2 : passoword length if bruteForce mode
