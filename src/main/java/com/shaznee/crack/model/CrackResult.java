@@ -5,6 +5,10 @@ package com.shaznee.crack.model;
  */
 public class CrackResult {
 
+    public static final long TIME_SECONDS = 1000;
+    public static final long TIME_MINUTE = 1000 * 60;
+    public static final long TIME_HOURS = 1000 * 60 * 60;
+
     private String password;
     private long timeTaken;
     private boolean isSuccessful = false;
@@ -22,8 +26,8 @@ public class CrackResult {
         this.timeTaken = timeTaken;
     }
 
-    public long getTimeTaken() {
-        return timeTaken;
+    public long getTimeTaken(long timeInUnits) {
+        return timeTaken/timeInUnits;
     }
 
     public boolean isSuccessful() {

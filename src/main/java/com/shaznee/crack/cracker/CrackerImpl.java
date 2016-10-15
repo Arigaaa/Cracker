@@ -8,8 +8,6 @@ import com.shaznee.crack.model.CrackResult;
  */
 public abstract class CrackerImpl implements Cracker{
 
-    public final String CLEARLINE_FMT = "\r%30s\r";
-
     protected CrackerType crackerType;
 
     @Override

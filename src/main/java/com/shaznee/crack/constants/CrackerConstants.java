@@ -3,7 +3,7 @@ package com.shaznee.crack.constants;
 /**
  * Created by SHAZNEE on 07-Oct-16.
  */
-public class ErrorConstants {
+public class CrackerConstants {
 
     public static final String CREATE_CRACKER_USAGE = "Supported Modes \n" +
             "\t -D -> Dictionary Mode \n" +
@@ -19,5 +19,7 @@ public class ErrorConstants {
             "\t -AC  ->  Alpha Case Sensitive\n" +
             "\t -AN  ->  Aplhanumeric Case Insensitive\n" +
             "\t -ANC ->  Aplhanumeric Case Sensitive\n";
+
+    public static final String CLEARLINE_FMT = "\r%30s\r";
 
 }

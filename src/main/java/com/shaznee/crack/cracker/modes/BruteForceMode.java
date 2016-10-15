@@ -6,8 +6,6 @@ import com.shaznee.crack.exceptions.CrackerException;
 import com.shaznee.crack.exceptions.IncorrectPasswordException;
 import com.shaznee.crack.model.CrackResult;
 
-import java.util.Arrays;
-
 /**
  * Created by SHAZNEE on 07-Oct-16.
  */
@@ -60,7 +58,6 @@ public class BruteForceMode extends CrackerImpl {
     private void initCracker(String charSequence) {
 
         charLimit = charSequence;
-
         current = new char[passwordLength];
 
         this.beginning_char = charSequence.charAt(0);

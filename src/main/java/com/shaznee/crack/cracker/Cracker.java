@@ -1,10 +1,11 @@
 package com.shaznee.crack.cracker;
 
-import com.shaznee.crack.constants.ErrorConstants;
-import com.shaznee.crack.exceptions.CrackerException;
-import com.shaznee.crack.model.CrackResult;
 import com.shaznee.crack.cracker.modes.BruteForceMode;
 import com.shaznee.crack.cracker.modes.DictionaryMode;
+import com.shaznee.crack.exceptions.CrackerException;
+import com.shaznee.crack.model.CrackResult;
+
+import static com.shaznee.crack.constants.CrackerConstants.CREATE_CRACKER_USAGE;
 
 /**
  * Created by SHAZNEE on 07-Oct-16.
@@ -33,7 +34,7 @@ public interface Cracker {
             case MODE_BRUTE_FORCE:
 
                 if (args.length < 4) {
-                    throw new CrackerException(ErrorConstants.CREATE_CRACKER_USAGE);
+                    throw new CrackerException(CREATE_CRACKER_USAGE);
                 }
 
                 int passwordLength = Integer.parseInt(args[2]);
@@ -60,19 +61,19 @@ public interface Cracker {
                         charType = CharType.ALPHA_NUM_CASE_SENSITIVE;
                         break;
                     default:
-                        throw new CrackerException(ErrorConstants.CREATE_CRACKER_USAGE);
+                        throw new CrackerException(CREATE_CRACKER_USAGE);
                 }
 
                 if (passwordLength > 0 && charType != null) {
                     return new BruteForceMode(passwordLength, charType);
                 } else {
-                    throw new CrackerException(ErrorConstants.CREATE_CRACKER_USAGE);
+                    throw new CrackerException(CREATE_CRACKER_USAGE);
                 }
 
             case MODE_DICTIONARY:
 
                 if (args.length > 3) {
-                    throw new CrackerException(ErrorConstants.CREATE_CRACKER_USAGE);
+                    throw new CrackerException(CREATE_CRACKER_USAGE);
                 }
 
                 String dictionary = args[2];
@@ -81,7 +82,7 @@ public interface Cracker {
                 }
 
             default:
-                throw new CrackerException(ErrorConstants.CREATE_CRACKER_USAGE);
+                throw new CrackerException(CREATE_CRACKER_USAGE);
         }
     }
 
