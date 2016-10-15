@@ -16,8 +16,11 @@ public class PDFCracker implements CrackerType {
 
     private File file;
 
-    public PDFCracker(String target) {
+    public PDFCracker(String target) throws CrackerException {
         file = new File(target);
+        if (!file.exists()) {
+            throw new CrackerException("File Does not exixt");
+        }
         System.out.println("Cracking : " + file.getAbsolutePath());
     }
 
@@ -25,15 +28,14 @@ public class PDFCracker implements CrackerType {
     public CrackResult attempt(String password) throws IncorrectPasswordException, CrackerException {
         PDDocument document = null;
         try {
-
             System.out.printf("\rAttempting with: %3s", password);
             document = PDDocument.load(file, password);
 
             int numberOfPages = document.getNumberOfPages();
-            System.out.println("Pages :" + numberOfPages);
+            System.out.println("\n Pages :" + numberOfPages);
 
             if (numberOfPages > 0) {
-                System.out.printf("\r Success");
+                System.out.println("Success");
                 return new CrackResult(true, password);
             } else {
                 return new CrackResult(false, "Not Found");
