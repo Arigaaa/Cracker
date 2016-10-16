@@ -37,7 +37,7 @@ public class DictionaryMode extends CrackerImpl {
             wordList = new ArrayList<>();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                wordList.addAll(Arrays.asList(line.split(" ")));
+                wordList.addAll(Arrays.asList(line.split("\\s*(\\s|=>|,)\\s*")));
             }
         }
         catch (IOException e) {

@@ -37,12 +37,13 @@ public class Crack {
                 Cracker cracker = Cracker.createCracker(args);
                 cracker.setCrackerType(new PDFCracker(args[0]));
                 CrackResult crackResult = cracker.crack();
+
                 if (crackResult.isSuccessful()) {
-                    System.out.println("Password \t\t: " + crackResult.getPassword());
-                    System.out.println("Time Elapsed \t: " + crackResult.getTimeTaken(CrackResult.TIME_SECONDS));
+                    System.out.println("Password : " + crackResult.getPassword());
+                    System.out.println("Time Elapsed (secs) : " + crackResult.getTimeTaken(CrackResult.TIME_SECONDS));
                 } else {
-                    System.out.println("Password \t\t: " + crackResult.getPassword());
-                    System.out.println("Time Elapsed \t: " + crackResult.getTimeTaken(CrackResult.TIME_SECONDS));
+                    System.out.println("Password : " + crackResult.getPassword());
+                    System.out.println("Time Elapsed (secs) : " + crackResult.getTimeTaken(CrackResult.TIME_SECONDS));
                 }
             } catch (CrackerException e) {
                 System.err.println(e.getMessage());
