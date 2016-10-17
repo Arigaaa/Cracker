@@ -6,6 +6,11 @@ import com.shaznee.crack.exceptions.CrackerException;
 import com.shaznee.crack.exceptions.IncorrectPasswordException;
 import com.shaznee.crack.model.CrackResult;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Created by SHAZNEE on 07-Oct-16.
  */
@@ -20,12 +25,15 @@ public class BruteForceMode extends CrackerImpl {
 
     private char beginning_char;
     private char ending_char;
+    private char[] currentPassword;
+
+    private String charSequence;
+
     private int passwordLength;
     private long maxCombinations;
 
-    private String charLimit;
-
-    private char[] current;
+    private boolean isAlphaNumericCaseSensitive = false;
+    private Set<String> generatedSet;
 
     public BruteForceMode(int passwordLength, CharType charType) {
         this.passwordLength = passwordLength;
@@ -50,6 +58,7 @@ public class BruteForceMode extends CrackerImpl {
                 initCracker(ALPHA_NUM_CASE_INSENSITIVE);
                 break;
             case ALPHA_NUM_CASE_SENSITIVE:
+                isAlphaNumericCaseSensitive = true;
                 initCracker(ALPHA_NUM_CASE_SENSITIVE);
                 break;
         }
@@ -57,16 +66,19 @@ public class BruteForceMode extends CrackerImpl {
 
     private void initCracker(String charSequence) {
 
-        charLimit = charSequence;
-        current = new char[passwordLength];
+        this.charSequence = charSequence;
+        beginning_char = this.charSequence.charAt(0);
+        ending_char = this.charSequence.charAt(charSequence.length() - 1);
+        currentPassword = new char[passwordLength];
 
-        this.beginning_char = charSequence.charAt(0);
-        this.ending_char = charSequence.charAt(charSequence.length() - 1);
+        maxCombinations = (long) Math.pow(this.charSequence.length(), passwordLength);
 
-        maxCombinations = (long) Math.pow(charSequence.length(), passwordLength);
+        if (isAlphaNumericCaseSensitive) {
+            generatedSet = new HashSet<>(this.charSequence.length() * passwordLength);
+        }
 
         for (int i = 0; i < passwordLength; i++) {
-            current[i] = beginning_char;
+            currentPassword[i] = beginning_char;
         }
 
     }
@@ -75,9 +87,32 @@ public class BruteForceMode extends CrackerImpl {
     protected CrackResult run() throws CrackerException {
         for (long i = 0; i < maxCombinations; i++) {
             try {
-                CrackResult crackResult = crackerType.attempt(getCurrent());
-                if (crackResult.isSuccessful()) {
-                    return crackResult;
+                String currentPassword = getCurrentPassword();
+                if (isAlphaNumericCaseSensitive) {
+                    if (generatedSet.contains(currentPassword)) {
+                        continue;
+                    } else {
+                        List<String> stringsWithCase = new ArrayList<>();
+                        stringsWithCase.add(currentPassword);
+                        stringsWithCase.add(currentPassword.toLowerCase());
+                        stringsWithCase.add(currentPassword.toUpperCase());
+                        for (String password : stringsWithCase) {
+                            try {
+                                CrackResult crackResult = crackerType.attempt(password);
+                                if (crackResult.isSuccessful()) {
+                                    return crackResult;
+                                }
+                                generatedSet.add(password);
+                            } catch (IncorrectPasswordException e) {
+                                continue;
+                            }
+                        }
+                    }
+                } else {
+                    CrackResult crackResult = crackerType.attempt(currentPassword);
+                    if (crackResult.isSuccessful()) {
+                        return crackResult;
+                    }
                 }
             } catch (IncorrectPasswordException e) {
                 continue;
@@ -88,19 +123,19 @@ public class BruteForceMode extends CrackerImpl {
         return new CrackResult(false, "Not Found");
     }
 
-    private String getCurrent() {
-        return new String(current);
+    private String getCurrentPassword() {
+        return new String(currentPassword);
     }
 
     private void generate() {
         for (int i = 0; i < passwordLength; i++) {
-            if (current[i] == ending_char) {
+            if (currentPassword[i] == ending_char) {
                 continue;
             }
-            current[i] = charLimit.charAt(charLimit.indexOf(current[i]) + 1);
+            currentPassword[i] = charSequence.charAt(charSequence.indexOf(currentPassword[i]) + 1);
             if (i > 0)
                 for (int z = 0; z < i; z++){
-                    current[z] = beginning_char;
+                    currentPassword[z] = beginning_char;
                 }
             break;
         }
