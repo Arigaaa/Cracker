@@ -16,12 +16,12 @@ import java.util.Set;
  */
 public class BruteForceMode extends CrackerImpl {
 
-    public static final String ALPHA_CASE_INSENSITIVE = "abcdefghijklmnopqrstuvwxyz";
-    public static final String ALPHA_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public static final String ALPHA_CASE_SENSITIVE = ALPHA_CASE_INSENSITIVE + ALPHA_UPPER;
-    public static final String NUMERIC = "0123456789";
-    public static final String ALPHA_NUM_CASE_INSENSITIVE = ALPHA_CASE_INSENSITIVE + NUMERIC;
-    public static final String ALPHA_NUM_CASE_SENSITIVE = ALPHA_CASE_INSENSITIVE + ALPHA_UPPER + NUMERIC;
+    private static final String ALPHA_CASE_INSENSITIVE = "abcdefghijklmnopqrstuvwxyz";
+    private static final String ALPHA_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String ALPHA_CASE_SENSITIVE = ALPHA_CASE_INSENSITIVE + ALPHA_UPPER;
+    private static final String NUMERIC = "0123456789";
+    private static final String ALPHA_NUM_CASE_INSENSITIVE = ALPHA_CASE_INSENSITIVE + NUMERIC;
+    private static final String ALPHA_NUM_CASE_SENSITIVE = ALPHA_CASE_INSENSITIVE + ALPHA_UPPER + NUMERIC;
 
     private char beginning_char;
     private char ending_char;
@@ -80,7 +80,6 @@ public class BruteForceMode extends CrackerImpl {
         for (int i = 0; i < passwordLength; i++) {
             currentPassword[i] = beginning_char;
         }
-
     }
 
     @Override
@@ -90,21 +89,24 @@ public class BruteForceMode extends CrackerImpl {
                 String currentPassword = getCurrentPassword();
                 if (isAlphaNumericCaseSensitive) {
                     if (generatedSet.contains(currentPassword)) {
+                        System.out.println("Contains");
                         continue;
                     } else {
-                        List<String> stringsWithCase = new ArrayList<>();
+                        List<String> stringsWithCase = new ArrayList<>(3);
                         stringsWithCase.add(currentPassword);
                         stringsWithCase.add(currentPassword.toLowerCase());
                         stringsWithCase.add(currentPassword.toUpperCase());
+
                         for (String password : stringsWithCase) {
                             try {
                                 CrackResult crackResult = crackerType.attempt(password);
                                 if (crackResult.isSuccessful()) {
                                     return crackResult;
                                 }
-                                generatedSet.add(password);
                             } catch (IncorrectPasswordException e) {
                                 continue;
+                            } finally {
+                                generatedSet.add(password);
                             }
                         }
                     }
@@ -133,10 +135,11 @@ public class BruteForceMode extends CrackerImpl {
                 continue;
             }
             currentPassword[i] = charSequence.charAt(charSequence.indexOf(currentPassword[i]) + 1);
-            if (i > 0)
-                for (int z = 0; z < i; z++){
+            if (i > 0) {
+                for (int z = 0; z < i; z++) {
                     currentPassword[z] = beginning_char;
                 }
+            }
             break;
         }
     }

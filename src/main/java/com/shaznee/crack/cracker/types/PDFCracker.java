@@ -28,8 +28,8 @@ public class PDFCracker implements CrackerType {
 
     @Override
     public CrackResult attempt(String password) throws IncorrectPasswordException, CrackerException {
-        System.out.printf("\rAttempting with : %3s", password);
 
+        System.out.printf("\rAttempting with : %3s", password);
         try (
                 PDDocument document = PDDocument.load(file, password);
                 ) {
