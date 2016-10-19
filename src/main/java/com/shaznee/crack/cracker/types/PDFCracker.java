@@ -37,7 +37,13 @@ public class PDFCracker implements CrackerType {
             int numberOfPages = document.getNumberOfPages();
             if (numberOfPages > 0) {
                 System.out.printf(CLEARLINE_FMT, "");
-                return new CrackResult(true, password);
+                try {
+                    document.close();
+                } catch (IOException e) {
+                    throw new CrackerException("Could not close file", e);
+                } finally {
+                    return new CrackResult(true, password);
+                }
             } else {
                 return new CrackResult(false, "Not Found");
             }
