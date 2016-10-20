@@ -1,4 +1,4 @@
-package com.shaznee.crack.cracker;
+package com.shaznee.cracker.core;
 
 /**
  * Created by SHAZNEE on 07-Oct-16.

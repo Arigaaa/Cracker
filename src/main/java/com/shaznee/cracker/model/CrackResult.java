@@ -1,4 +1,4 @@
-package com.shaznee.crack.model;
+package com.shaznee.cracker.model;
 
 /**
  * Created by SHAZNEE on 07-Oct-16.

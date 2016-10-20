@@ -1,4 +1,4 @@
-group 'com.shaznee.crack'
+group 'com.shaznee.cracker'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

@@ -1,11 +1,11 @@
-package com.shaznee.crack.cracker;
+package com.shaznee.cracker.core;
 
-import com.shaznee.crack.cracker.modes.BruteForceMode;
-import com.shaznee.crack.cracker.modes.DictionaryMode;
-import com.shaznee.crack.exceptions.CrackerException;
-import com.shaznee.crack.model.CrackResult;
+import com.shaznee.cracker.core.modes.BruteForceMode;
+import com.shaznee.cracker.core.modes.DictionaryMode;
+import com.shaznee.cracker.exceptions.CrackerException;
+import com.shaznee.cracker.model.CrackResult;
 
-import static com.shaznee.crack.constants.CrackerConstants.CREATE_CRACKER_USAGE;
+import static com.shaznee.cracker.constants.CrackerConstants.CREATE_CRACKER_USAGE;
 
 /**
  * Created by SHAZNEE on 07-Oct-16.

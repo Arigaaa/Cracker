@@ -1,4 +1,4 @@
-package com.shaznee.crack.exceptions;
+package com.shaznee.cracker.exceptions;
 
 /**
  * Created by SHAZNEE on 08-Oct-16.

@@ -1,11 +1,11 @@
-package com.shaznee.crack;
+package com.shaznee.cracker;
 
-import com.shaznee.crack.cracker.Cracker;
-import com.shaznee.crack.cracker.types.PDFCracker;
-import com.shaznee.crack.exceptions.CrackerException;
-import com.shaznee.crack.model.CrackResult;
+import com.shaznee.cracker.core.Cracker;
+import com.shaznee.cracker.core.extensions.PDFCracker;
+import com.shaznee.cracker.exceptions.CrackerException;
+import com.shaznee.cracker.model.CrackResult;
 
-import static com.shaznee.crack.constants.CrackerConstants.CREATE_CRACKER_USAGE;
+import static com.shaznee.cracker.constants.CrackerConstants.CREATE_CRACKER_USAGE;
 
 /**
  * Created by SHAZNEE on 07-Oct-16.
@@ -38,13 +38,9 @@ public class Crack {
                 cracker.setCrackerType(new PDFCracker(args[0]));
                 CrackResult crackResult = cracker.crack();
 
-                if (crackResult.isSuccessful()) {
-                    System.out.println("Password : " + crackResult.getPassword());
-                    System.out.println("Time Elapsed (secs) : " + crackResult.getTimeTaken(CrackResult.TIME_SECONDS));
-                } else {
-                    System.out.println("Password : " + crackResult.getPassword());
-                    System.out.println("Time Elapsed (secs) : " + crackResult.getTimeTaken(CrackResult.TIME_SECONDS));
-                }
+                System.out.println("Password : " + crackResult.getPassword());
+                System.out.println("Time Elapsed (secs) : " + crackResult.getTimeTaken(CrackResult.TIME_SECONDS));
+
             } catch (CrackerException e) {
                 System.err.println(e.getMessage());
             }

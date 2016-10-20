@@ -1,15 +1,15 @@
-package com.shaznee.crack.cracker.types;
+package com.shaznee.cracker.core.extensions;
 
-import com.shaznee.crack.cracker.CrackerType;
-import com.shaznee.crack.exceptions.CrackerException;
-import com.shaznee.crack.exceptions.IncorrectPasswordException;
-import com.shaznee.crack.model.CrackResult;
+import com.shaznee.cracker.core.CrackerType;
+import com.shaznee.cracker.exceptions.CrackerException;
+import com.shaznee.cracker.exceptions.IncorrectPasswordException;
+import com.shaznee.cracker.model.CrackResult;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.File;
 import java.io.IOException;
 
-import static com.shaznee.crack.constants.CrackerConstants.CLEARLINE_FMT;
+import static com.shaznee.cracker.constants.CrackerConstants.CLEARLINE_FMT;
 
 /**
  * Created by SHAZNEE on 10-Oct-16.

@@ -1,10 +1,10 @@
-package com.shaznee.crack.cracker.modes;
+package com.shaznee.cracker.core.modes;
 
-import com.shaznee.crack.cracker.CharType;
-import com.shaznee.crack.cracker.CrackerImpl;
-import com.shaznee.crack.exceptions.CrackerException;
-import com.shaznee.crack.exceptions.IncorrectPasswordException;
-import com.shaznee.crack.model.CrackResult;
+import com.shaznee.cracker.core.CharType;
+import com.shaznee.cracker.core.CrackerImpl;
+import com.shaznee.cracker.exceptions.CrackerException;
+import com.shaznee.cracker.exceptions.IncorrectPasswordException;
+import com.shaznee.cracker.model.CrackResult;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -89,7 +89,6 @@ public class BruteForceMode extends CrackerImpl {
                 String currentPassword = getCurrentPassword();
                 if (isAlphaNumericCaseSensitive) {
                     if (generatedSet.contains(currentPassword)) {
-                        System.out.println("Contains");
                         continue;
                     } else {
                         List<String> stringsWithCase = new ArrayList<>(3);

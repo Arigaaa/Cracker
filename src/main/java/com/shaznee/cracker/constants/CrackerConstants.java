@@ -1,4 +1,4 @@
-package com.shaznee.crack.constants;
+package com.shaznee.cracker.constants;
 
 /**
  * Created by SHAZNEE on 07-Oct-16.
