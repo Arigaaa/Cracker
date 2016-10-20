@@ -119,7 +119,7 @@ public class BruteForceMode extends CrackerImpl {
             } catch (IncorrectPasswordException e) {
                 continue;
             } finally {
-                generate();
+                generateAscending();
             }
         }
         return new CrackResult(false, "Not Found");
@@ -129,19 +129,30 @@ public class BruteForceMode extends CrackerImpl {
         return new String(currentPassword);
     }
 
-    private void generate() {
+    private void generateDescending() {
         for (int i = 0; i < passwordLength; i++) {
             if (currentPassword[i] == ending_char) {
                 continue;
             }
             currentPassword[i] = charSequence.charAt(charSequence.indexOf(currentPassword[i]) + 1);
-            if (i > 0) {
-                for (int z = 0; z < i; z++) {
-                    currentPassword[z] = beginning_char;
-                }
+            for (int z = 0; z < i; z++) {
+                currentPassword[z] = beginning_char;
             }
             break;
         }
     }
 
+    private void generateAscending() {
+        for (int i = passwordLength - 1; i > 0; i--) {
+            if (currentPassword[i] == ending_char) {
+                currentPassword[i] = beginning_char;
+                continue;
+            }
+            currentPassword[i] = charSequence.charAt(charSequence.indexOf(currentPassword[i]) + 1);
+            if (i == 0) {
+                currentPassword[i] = beginning_char;
+            }
+            break;
+        }
+    }
 }

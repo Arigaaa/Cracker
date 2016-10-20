@@ -47,6 +47,7 @@ public class DictionaryMode extends CrackerImpl {
 
     @Override
     protected CrackResult run() throws CrackerException {
+        System.out.println("Number of words :" + wordList.size());
         for (String word : wordList) {
             try {
                 CrackResult crackResult = crackerType.attempt(word);
