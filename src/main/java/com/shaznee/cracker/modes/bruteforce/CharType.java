@@ -1,4 +1,4 @@
-package com.shaznee.cracker.core;
+package com.shaznee.cracker.modes.bruteforce;
 
 /**
  * Created by SHAZNEE on 07-Oct-16.

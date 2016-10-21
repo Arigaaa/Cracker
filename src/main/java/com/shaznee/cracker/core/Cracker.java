@@ -1,9 +1,10 @@
 package com.shaznee.cracker.core;
 
-import com.shaznee.cracker.core.modes.BruteForceMode;
-import com.shaznee.cracker.core.modes.DictionaryMode;
+import com.shaznee.cracker.modes.bruteforce.BruteForceMode;
+import com.shaznee.cracker.modes.dictionary.DictionaryMode;
+import com.shaznee.cracker.modes.bruteforce.CharType;
 import com.shaznee.cracker.exceptions.CrackerException;
-import com.shaznee.cracker.model.CrackResult;
+import com.shaznee.cracker.core.model.CrackResult;
 
 import static com.shaznee.cracker.constants.CrackerConstants.CREATE_CRACKER_USAGE;
 
@@ -14,6 +15,9 @@ public interface Cracker {
 
     String MODE_BRUTE_FORCE = "-B";
     String MODE_DICTIONARY = "-D";
+
+    String ORDER_ASCENDING = "-OA";
+    String ORDER_DESCENDING = "-OD";
 
     String CHAR_TYPE_ALPHA_CASE_INSENSITIVE = "-A";
     String CHAR_TYPE_ALPHA_UPPER = "-AU";
@@ -33,7 +37,7 @@ public interface Cracker {
         switch (mode) {
             case MODE_BRUTE_FORCE:
 
-                if (args.length < 4) {
+                if (args.length < 5) {
                     throw new CrackerException(CREATE_CRACKER_USAGE);
                 }
 

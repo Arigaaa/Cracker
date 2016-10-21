@@ -1,7 +1,7 @@
 package com.shaznee.cracker.core;
 
 import com.shaznee.cracker.exceptions.CrackerException;
-import com.shaznee.cracker.model.CrackResult;
+import com.shaznee.cracker.core.model.CrackResult;
 
 /**
  * Created by SHAZNEE on 07-Oct-16.

@@ -3,7 +3,7 @@ package com.shaznee.cracker;
 import com.shaznee.cracker.core.Cracker;
 import com.shaznee.cracker.core.extensions.PDFCracker;
 import com.shaznee.cracker.exceptions.CrackerException;
-import com.shaznee.cracker.model.CrackResult;
+import com.shaznee.cracker.core.model.CrackResult;
 
 import static com.shaznee.cracker.constants.CrackerConstants.CREATE_CRACKER_USAGE;
 
@@ -29,6 +29,10 @@ public class Crack {
      *                -AC  - Alpha Case Sensitive
      *                -AN  - Alphanumeric Case Insensitive
      *                -ANC - Alphanumeric Case Sensitive
+     *
+     * arg 4 : order of bruteforce generation
+     *                -OA - Ascending order
+     *                -OD - Descending order
      */
 
     public static void main(String... args) {

@@ -1,9 +1,9 @@
-package com.shaznee.cracker.core.modes;
+package com.shaznee.cracker.modes.dictionary;
 
 import com.shaznee.cracker.core.CrackerImpl;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.exceptions.IncorrectPasswordException;
-import com.shaznee.cracker.model.CrackResult;
+import com.shaznee.cracker.core.model.CrackResult;
 
 import java.io.BufferedReader;
 import java.io.File;

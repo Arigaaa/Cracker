@@ -3,7 +3,7 @@ package com.shaznee.cracker.core.extensions;
 import com.shaznee.cracker.core.CrackerType;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.exceptions.IncorrectPasswordException;
-import com.shaznee.cracker.model.CrackResult;
+import com.shaznee.cracker.core.model.CrackResult;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.File;

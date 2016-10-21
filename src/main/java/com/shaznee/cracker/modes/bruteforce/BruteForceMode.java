@@ -1,10 +1,9 @@
-package com.shaznee.cracker.core.modes;
+package com.shaznee.cracker.modes.bruteforce;
 
-import com.shaznee.cracker.core.CharType;
 import com.shaznee.cracker.core.CrackerImpl;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.exceptions.IncorrectPasswordException;
-import com.shaznee.cracker.model.CrackResult;
+import com.shaznee.cracker.core.model.CrackResult;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -118,7 +117,7 @@ public class BruteForceMode extends CrackerImpl {
             } catch (IncorrectPasswordException e) {
                 continue;
             } finally {
-                generateAscending();
+                generateDescending();
             }
         }
         return new CrackResult(false, "Not Found");
@@ -128,7 +127,7 @@ public class BruteForceMode extends CrackerImpl {
         return new String(currentPassword);
     }
 
-    private void generateDescending() {
+    private void generateAscending() {
         for (int i = 0; i < passwordLength; i++) {
             if (currentPassword[i] == ending_char) {
                 continue;
@@ -141,7 +140,7 @@ public class BruteForceMode extends CrackerImpl {
         }
     }
 
-    private void generateAscending() {
+    private void generateDescending() {
         for (int i = passwordLength - 1; i > 0; i--) {
             if (currentPassword[i] == ending_char) {
                 currentPassword[i] = beginning_char;
