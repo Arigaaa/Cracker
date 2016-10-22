@@ -1,10 +1,12 @@
 package com.shaznee.cracker.core;
 
 import com.shaznee.cracker.modes.bruteforce.BruteForceMode;
+import com.shaznee.cracker.modes.bruteforce.Order;
 import com.shaznee.cracker.modes.dictionary.DictionaryMode;
 import com.shaznee.cracker.modes.bruteforce.CharType;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.core.model.CrackResult;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 import static com.shaznee.cracker.constants.CrackerConstants.CREATE_CRACKER_USAGE;
 
@@ -37,39 +39,57 @@ public interface Cracker {
         switch (mode) {
             case MODE_BRUTE_FORCE:
 
-                if (args.length < 5) {
+                if (args.length < 3) {
                     throw new CrackerException(CREATE_CRACKER_USAGE);
                 }
-
+                
                 int passwordLength = Integer.parseInt(args[2]);
-                String charTypeArg = args[3];
-                CharType charType;
+                CharType charType = CharType.ALPHA_CASE_INSENSITIVE;
 
-                switch (charTypeArg) {
-                    case CHAR_TYPE_ALPHA_UPPER:
-                        charType = CharType.ALPHA_UPPER;
-                        break;
-                    case CHAR_TYPE_ALPHA_CASE_INSENSITIVE:
-                        charType = CharType.ALPHA_CASE_INSENSITIVE;
-                        break;
-                    case CHAR_TYPE_ALPHA_ALPHA_CASE_SENSITIVE:
-                        charType = CharType.ALPHA_CASE_SENSITIVE;
-                        break;
-                    case CHAR_TYPE_NUMERIC:
-                        charType = CharType.NUMERIC;
-                        break;
-                    case CHAR_TYPE_ALPHA_NUM_CASE_INSENSITIVE:
-                        charType = CharType.ALPHA_NUM_CASE_INSENSITIVE;
-                        break;
-                    case CHAR_TYPE_ALPHA_NUM_CASE_SENSITIVE:
-                        charType = CharType.ALPHA_NUM_CASE_SENSITIVE;
-                        break;
-                    default:
-                        throw new CrackerException(CREATE_CRACKER_USAGE);
+                Order order = Order.DESCENDING;
+                if (args.length > 4) {
+                    String argOrder = args[4];
+                    if (argOrder != null) {
+                        switch (argOrder) {
+                            case ORDER_ASCENDING:
+                                order = Order.ASCENDING;
+                                break;
+                            case ORDER_DESCENDING:
+                                order = Order.DESCENDING;
+                                break;
+                        }
+                    }
+                }
+
+
+                if (args.length > 3) {
+                    String charTypeArg = args[3];
+                    switch (charTypeArg) {
+                        case CHAR_TYPE_ALPHA_UPPER:
+                            charType = CharType.ALPHA_UPPER;
+                            break;
+                        case CHAR_TYPE_ALPHA_CASE_INSENSITIVE:
+                            charType = CharType.ALPHA_CASE_INSENSITIVE;
+                            break;
+                        case CHAR_TYPE_ALPHA_ALPHA_CASE_SENSITIVE:
+                            charType = CharType.ALPHA_CASE_SENSITIVE;
+                            break;
+                        case CHAR_TYPE_NUMERIC:
+                            charType = CharType.NUMERIC;
+                            break;
+                        case CHAR_TYPE_ALPHA_NUM_CASE_INSENSITIVE:
+                            charType = CharType.ALPHA_NUM_CASE_INSENSITIVE;
+                            break;
+                        case CHAR_TYPE_ALPHA_NUM_CASE_SENSITIVE:
+                            charType = CharType.ALPHA_NUM_CASE_SENSITIVE;
+                            break;
+                        default:
+                            throw new CrackerException(CREATE_CRACKER_USAGE);
+                    }
                 }
 
                 if (passwordLength > 0 && charType != null) {
-                    return new BruteForceMode(passwordLength, charType);
+                    return new BruteForceMode(passwordLength, charType, order);
                 } else {
                     throw new CrackerException(CREATE_CRACKER_USAGE);
                 }

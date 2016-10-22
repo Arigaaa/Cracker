@@ -4,6 +4,7 @@ import com.shaznee.cracker.core.CrackerImpl;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.exceptions.IncorrectPasswordException;
 import com.shaznee.cracker.core.model.CrackResult;
+import com.sun.org.apache.bcel.internal.generic.SWAP;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,6 +28,7 @@ public class BruteForceMode extends CrackerImpl {
     private char[] currentPassword;
 
     private String charSequence;
+    private Order order;
 
     private int passwordLength;
     private long maxCombinations;
@@ -34,8 +36,9 @@ public class BruteForceMode extends CrackerImpl {
     private boolean isAlphaNumericCaseSensitive = false;
     private Set<String> generatedSet;
 
-    public BruteForceMode(int passwordLength, CharType charType) {
+    public BruteForceMode(int passwordLength, CharType charType, Order order) {
         this.passwordLength = passwordLength;
+        this.order = order;
         init(charType);
     }
 
@@ -117,7 +120,14 @@ public class BruteForceMode extends CrackerImpl {
             } catch (IncorrectPasswordException e) {
                 continue;
             } finally {
-                generateDescending();
+                switch (order) {
+                    case DESCENDING:
+                        generateDescending();
+                        break;
+                    case ASCENDING:
+                        generateAscending();
+                        break;
+                }
             }
         }
         return new CrackResult(false, "Not Found");

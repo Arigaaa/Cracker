@@ -30,7 +30,7 @@ public class Crack {
      *                -AN  - Alphanumeric Case Insensitive
      *                -ANC - Alphanumeric Case Sensitive
      *
-     * arg 4 : order of bruteforce generation
+     * arg 4 : (optional) order of bruteforce generation [default: Descending order]
      *                -OA - Ascending order
      *                -OD - Descending order
      */
