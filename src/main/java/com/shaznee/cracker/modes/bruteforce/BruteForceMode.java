@@ -1,10 +1,9 @@
 package com.shaznee.cracker.modes.bruteforce;
 
 import com.shaznee.cracker.core.CrackerImpl;
+import com.shaznee.cracker.core.model.CrackResult;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.exceptions.IncorrectPasswordException;
-import com.shaznee.cracker.core.model.CrackResult;
-import com.sun.org.apache.bcel.internal.generic.SWAP;
 
 import java.util.ArrayList;
 import java.util.HashSet;

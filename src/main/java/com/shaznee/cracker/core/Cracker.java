@@ -1,12 +1,11 @@
 package com.shaznee.cracker.core;
 
+import com.shaznee.cracker.core.model.CrackResult;
+import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.modes.bruteforce.BruteForceMode;
+import com.shaznee.cracker.modes.bruteforce.CharType;
 import com.shaznee.cracker.modes.bruteforce.Order;
 import com.shaznee.cracker.modes.dictionary.DictionaryMode;
-import com.shaznee.cracker.modes.bruteforce.CharType;
-import com.shaznee.cracker.exceptions.CrackerException;
-import com.shaznee.cracker.core.model.CrackResult;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 import static com.shaznee.cracker.constants.CrackerConstants.CREATE_CRACKER_USAGE;
 

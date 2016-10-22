@@ -5,6 +5,16 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
+jar {
+    doFirst {
+        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+    manifest {
+        attributes 'Main-Class': 'com.shaznee.cracker.Crack'
+    }
+}
+
 repositories {
     mavenCentral()
 }
