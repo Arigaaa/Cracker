@@ -1,6 +1,6 @@
 package com.shaznee.cracker.core;
 
-import com.shaznee.cracker.core.extensions.PDFCracker;
+import com.shaznee.cracker.extensions.PDFCracker;
 import com.shaznee.cracker.core.model.CrackResult;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.modes.bruteforce.BruteForceMode;

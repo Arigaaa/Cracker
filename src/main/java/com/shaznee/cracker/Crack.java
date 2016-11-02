@@ -1,7 +1,6 @@
 package com.shaznee.cracker;
 
 import com.shaznee.cracker.core.Cracker;
-import com.shaznee.cracker.core.extensions.PDFCracker;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.core.model.CrackResult;
 

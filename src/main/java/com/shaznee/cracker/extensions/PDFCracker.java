@@ -1,4 +1,4 @@
-package com.shaznee.cracker.core.extensions;
+package com.shaznee.cracker.extensions;
 
 import com.shaznee.cracker.core.TargetCracker;
 import com.shaznee.cracker.exceptions.CrackerException;

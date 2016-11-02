@@ -9,9 +9,9 @@ public class CrackerConstants {
             "\t -D -> Dictionary Mode \n" +
             "\t -B -> Brute Force Mode\n\n" +
             "Dictionary Mode Usage: \n" +
-            "\t Crack <target> -D <{Dictionary File}.txt>\n\n" +
+            "\t Cracker-<version> <target> -D <{Dictionary File}.txt>\n\n" +
             "Brute Force Mode Usage : \n " +
-            "\t Crack <target> -B <password length> <Character Type> <Generation Order> \n\n" +
+            "\t Cracker-<version> <target> -B <password length> <Character Type> <Generation Order> \n\n" +
             "Supported Character Types (Optional) \n" +
             "\t -A   ->  Alpha Case Insensitive (Default)\n" +
             "\t -N   ->  Numeric\n" +
