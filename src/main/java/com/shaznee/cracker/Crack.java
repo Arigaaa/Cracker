@@ -39,7 +39,6 @@ public class Crack {
         if (args.length > 2) {
             try {
                 Cracker cracker = Cracker.createCracker(args);
-                cracker.setCrackerType(new PDFCracker(args[0]));
                 CrackResult crackResult = cracker.crack();
 
                 System.out.println("Password : " + crackResult.getPassword());

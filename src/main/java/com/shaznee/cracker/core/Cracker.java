@@ -1,5 +1,6 @@
 package com.shaznee.cracker.core;
 
+import com.shaznee.cracker.core.extensions.PDFCracker;
 import com.shaznee.cracker.core.model.CrackResult;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.modes.bruteforce.BruteForceMode;
@@ -27,8 +28,6 @@ public interface Cracker {
     String CHAR_TYPE_ALPHA_NUM_CASE_INSENSITIVE = "-AN";
     String CHAR_TYPE_ALPHA_NUM_CASE_SENSITIVE = "-ANC";
 
-    void setCrackerType(CrackerType crackerType);
-
     CrackResult crack() throws CrackerException;
 
     static Cracker createCracker(String... args) throws CrackerException {
@@ -41,7 +40,7 @@ public interface Cracker {
                 if (args.length < 3) {
                     throw new CrackerException(CREATE_CRACKER_USAGE);
                 }
-                
+
                 int passwordLength = Integer.parseInt(args[2]);
                 CharType charType = CharType.ALPHA_CASE_INSENSITIVE;
 
@@ -88,7 +87,12 @@ public interface Cracker {
                 }
 
                 if (passwordLength > 0 && charType != null) {
-                    return new BruteForceMode(passwordLength, charType, order);
+                    return new BruteForceMode.Builder()
+                            .setPasswordLength(passwordLength)
+                            .setCharType(charType)
+                            .setOrder(order)
+                            .setCrackerType(new PDFCracker(args[0]))
+                            .build();
                 } else {
                     throw new CrackerException(CREATE_CRACKER_USAGE);
                 }
@@ -101,7 +105,7 @@ public interface Cracker {
 
                 String dictionary = args[2];
                 if (dictionary.length() > 0) {
-                    return new DictionaryMode(dictionary);
+                    return new DictionaryMode(dictionary, new PDFCracker(args[0]));
                 }
 
             default:

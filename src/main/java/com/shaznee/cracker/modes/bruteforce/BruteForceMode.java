@@ -1,6 +1,7 @@
 package com.shaznee.cracker.modes.bruteforce;
 
 import com.shaznee.cracker.core.CrackerImpl;
+import com.shaznee.cracker.core.TargetCracker;
 import com.shaznee.cracker.core.model.CrackResult;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.exceptions.IncorrectPasswordException;
@@ -35,7 +36,8 @@ public class BruteForceMode extends CrackerImpl {
     private boolean isAlphaNumericCaseSensitive = false;
     private Set<String> generatedSet;
 
-    public BruteForceMode(int passwordLength, CharType charType, Order order) {
+    BruteForceMode(int passwordLength, CharType charType, Order order, TargetCracker targetCracker) {
+        super(targetCracker);
         this.passwordLength = passwordLength;
         this.order = order;
         init(charType);
@@ -99,7 +101,7 @@ public class BruteForceMode extends CrackerImpl {
 
                         for (String password : stringsWithCase) {
                             try {
-                                CrackResult crackResult = crackerType.attempt(password);
+                                CrackResult crackResult = targetCracker.attempt(password);
                                 if (crackResult.isSuccessful()) {
                                     return crackResult;
                                 }
@@ -111,7 +113,7 @@ public class BruteForceMode extends CrackerImpl {
                         }
                     }
                 } else {
-                    CrackResult crackResult = crackerType.attempt(currentPassword);
+                    CrackResult crackResult = targetCracker.attempt(currentPassword);
                     if (crackResult.isSuccessful()) {
                         return crackResult;
                     }
@@ -160,6 +162,38 @@ public class BruteForceMode extends CrackerImpl {
                 currentPassword[i] = beginning_char;
             }
             break;
+        }
+    }
+
+    public static class Builder {
+
+        private int passwordLength;
+        private CharType charType;
+        private Order order;
+        private TargetCracker crackerType;
+
+        public Builder setPasswordLength(int passwordLength) {
+            this.passwordLength = passwordLength;
+            return this;
+        }
+
+        public Builder setCharType(CharType charType) {
+            this.charType = charType;
+            return this;
+        }
+
+        public Builder setOrder(Order order) {
+            this.order = order;
+            return this;
+        }
+
+        public Builder setCrackerType(TargetCracker crackerType) {
+            this.crackerType = crackerType;
+            return this;
+        }
+
+        public BruteForceMode build() {
+            return new BruteForceMode(passwordLength, charType, order, crackerType);
         }
     }
 }

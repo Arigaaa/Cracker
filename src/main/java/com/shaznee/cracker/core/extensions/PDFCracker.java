@@ -1,6 +1,6 @@
 package com.shaznee.cracker.core.extensions;
 
-import com.shaznee.cracker.core.CrackerType;
+import com.shaznee.cracker.core.TargetCracker;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.exceptions.IncorrectPasswordException;
 import com.shaznee.cracker.core.model.CrackResult;
@@ -14,7 +14,7 @@ import static com.shaznee.cracker.constants.CrackerConstants.CLEARLINE_FMT;
 /**
  * Created by SHAZNEE on 10-Oct-16.
  */
-public class PDFCracker implements CrackerType {
+public class PDFCracker implements TargetCracker {
 
     private File file;
 

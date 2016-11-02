@@ -1,6 +1,7 @@
 package com.shaznee.cracker.modes.dictionary;
 
 import com.shaznee.cracker.core.CrackerImpl;
+import com.shaznee.cracker.core.TargetCracker;
 import com.shaznee.cracker.exceptions.CrackerException;
 import com.shaznee.cracker.exceptions.IncorrectPasswordException;
 import com.shaznee.cracker.core.model.CrackResult;
@@ -21,7 +22,8 @@ public class DictionaryMode extends CrackerImpl {
 
     private List<String> wordList;
 
-    public DictionaryMode(String dictionary) throws CrackerException {
+    public DictionaryMode(String dictionary, TargetCracker targetCracker) throws CrackerException {
+        super(targetCracker);
         File dictionaryFile = new File(dictionary);
         if (!dictionaryFile.exists()) {
             throw new CrackerException("Dictionary file does not exixt");
@@ -50,7 +52,7 @@ public class DictionaryMode extends CrackerImpl {
         System.out.println("Number of words :" + wordList.size());
         for (String word : wordList) {
             try {
-                CrackResult crackResult = crackerType.attempt(word);
+                CrackResult crackResult = targetCracker.attempt(word);
                 if (crackResult.isSuccessful()) {
                     return crackResult;
                 }

@@ -8,11 +8,10 @@ import com.shaznee.cracker.core.model.CrackResult;
  */
 public abstract class CrackerImpl implements Cracker{
 
-    protected CrackerType crackerType;
+    protected TargetCracker targetCracker;
 
-    @Override
-    public void setCrackerType(CrackerType crackerType) {
-        this.crackerType = crackerType;
+    protected CrackerImpl(TargetCracker targetCracker) {
+        this.targetCracker = targetCracker;
     }
 
     @Override

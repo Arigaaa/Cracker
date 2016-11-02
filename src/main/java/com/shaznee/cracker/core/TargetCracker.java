@@ -7,7 +7,7 @@ import com.shaznee.cracker.core.model.CrackResult;
 /**
  * Created by SHAZNEE on 10-Oct-16.
  */
-public interface CrackerType {
+public interface TargetCracker {
 
     CrackResult attempt(String password) throws IncorrectPasswordException, CrackerException;
 
