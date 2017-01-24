@@ -31,7 +31,7 @@ public class PDFCracker implements TargetCracker {
 
         System.out.printf("\rAttempting with : %3s", password);
         try (
-                PDDocument document = PDDocument.load(file, password);
+                PDDocument document = PDDocument.load(file, password)
                 ) {
 
             int numberOfPages = document.getNumberOfPages();
